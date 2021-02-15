@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<!-- <script>
+    const webSocket = new WebSocket("ws://localhost:8005");
+    webSocket.onopen = function(){
+        console.log('웹소켓 통신')
+    };
+    webSocket.onmessage = function(e){
+        console.log(e.data)
+        webSocket.send('클라이언트에서 서버로 답장')
+    };
+
+</script> -->
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    const socket = io.connect('http://localhost:8005',{
+        path:'/socket.io',
+        transports:['websocket'],   //polling 방식 => websocket 업그레이드
+    });
+
+    socket.on('news',function(data){
+        console.log(data);
+        socket.emit('reply','Hello Node.JS');
+    });
+    socket.on('lsm',function(data){
+        console.log(data);
+        socket.emit('reply','Hello Node.JS');
+    });
+    socket.on('babo',function(data){
+        console.log(data);
+        socket.emit('reply','Hello Node.JS');
+    });
+
+</script>
+<body>
+    
+</body>
+</html>
